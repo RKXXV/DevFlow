@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY package.json package-lock.json ./
 
-RUN npm ci
+RUN npm install --legacy-peer-deps --no-audit --no-fund
 
 
 FROM node:20-alpine AS builder
@@ -16,12 +16,12 @@ COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
 
+ENV NEXT_TELEMETRY_DISABLED=1
 ENV MONGODB_URI="mongodb://localhost:27017/devflow"
-ENV NEXTAUTH_SECRET="build-only-secret"
-ENV AUTH_SECRET="build-only-secret"
+ENV NEXTAUTH_SECRET="build-placeholder"
+ENV AUTH_SECRET="build-placeholder"
 ENV AUTH_TRUST_HOST="true"
 ENV AUTH_URL="http://localhost:3000"
-ENV NEXTAUTH_URL="http://localhost:3000"
 
 RUN npm run build
 
