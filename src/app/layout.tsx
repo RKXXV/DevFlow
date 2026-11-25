@@ -1,4 +1,4 @@
-import { Inter, Space_Grotesk as SpaceGrotesk } from "next/font/google";
+import localFont from "next/font/local";
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
 
@@ -10,16 +10,17 @@ import { Toaster } from "@/components/ui/sonner";
 
 import "./globals.css";
 
-const inter = Inter({
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  subsets: ["latin"],
+// Подключаем локальные шрифты
+const inter = localFont({
+  src: "../fonts/Inter-Regular.ttf", // Убедитесь, что путь правильный
   variable: "--font-inter",
+  display: "swap",
 });
 
-const spaceGrotesk = SpaceGrotesk({
-  weight: ["300", "400", "500", "600", "700"],
-  subsets: ["latin"],
+const spaceGrotesk = localFont({
+  src: "../fonts/SpaceGrotesk-Regular.ttf", // Убедитесь, что путь правильный
   variable: "--font-space-grotesk",
+  display: "swap",
 });
 
 export const metadata = generateMetadata({
@@ -37,7 +38,7 @@ export default async function RootLayout({
   const session = await auth();
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="ru" suppressHydrationWarning>
       <SessionProvider session={session}>
         <body
           className={`${inter.className} ${spaceGrotesk.variable} antialiased`}
